@@ -19,7 +19,25 @@ public class WorldcupsDAO {
         }
 
 
-        public Optional<Worldcups> get(long id) {
+
+
+
+
+        public List<Worldcups> getAll() {
+
+            EntityManager em = getEntityManager();
+
+            try {
+                List<Worldcups> todos = em.createNamedQuery("Worldcups.findAll").getResultList();
+
+                return todos;
+
+            } finally {
+                em.close();
+            }
+        }
+/*
+public Optional<Worldcups> get(long id) {
 
             var em = getEntityManager();
 
@@ -34,22 +52,7 @@ public class WorldcupsDAO {
 
         }
 
-        @SuppressWarnings("unchecked")
 
-        public List<Worldcups> getAll() {
-
-            var em = getEntityManager();
-
-            try {
-                List<Worldcups> todos = em.createNamedQuery("Worldcups.findAll").getResultList();
-
-                return todos;
-
-            } finally {
-                em.close();
-            }
-        }
-/*
         @Override
         public void save(Todo t) {
 

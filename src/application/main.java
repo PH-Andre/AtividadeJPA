@@ -6,9 +6,14 @@ import dao.WorldcupsDAO;
 public class main {
     public static void main(String[] args) {
 
-        var cupDao = new WorldcupsDAO();
+        var func = new funcionalidades();
         var matches = new MatchesDAO();
 
-        System.out.println(cupDao.getAll());
+
+      //  func.listaInformacoesCopas();
+
+        func.InformacaoFinalEspecifica(1982);
+       
+        
     }
 }
