@@ -3,6 +3,8 @@ package dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
+import model.Worldcupmatches;
 import model.Worldcups;
 
 import java.util.List;
@@ -19,6 +21,41 @@ public class WorldcupsDAO {
         }
 
 
+    public Optional<Worldcups> get(int year) {
+
+        EntityManager em = getEntityManager();
+
+        try {
+
+            Query query = em.createQuery("Select w FROM Worldcups w where w.year = "+year);
+
+                Worldcups worldCupFinal = (Worldcups) query.getSingleResult();
+
+                return Optional.ofNullable(worldCupFinal);
+        } finally {
+            em.close();
+        }}
+
+
+    public void save(Worldcups t) {
+
+        var em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            em.persist(t);
+
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+    }
 
 
 
